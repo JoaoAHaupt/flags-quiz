@@ -1,22 +1,27 @@
-// Buttons.js
+import React from 'react';
 import './styles.css';
 
-export const Buttons = ({ countryName, handleClick }) => {
-    
+export const Buttons = ({ countryName1, countryName2, countryName3, countryName4, handleClick,buttonColors }) => {
+    const buttonOrders = [
+        [countryName1, countryName2, countryName3, countryName4],
+        [countryName2, countryName1, countryName3, countryName4],
+        [countryName2, countryName3, countryName1, countryName4],
+        [countryName2, countryName3, countryName4, countryName1]
+    ];
+
+
+    const randomNumber = Math.floor(Math.random() * buttonOrders.length);
+
     return (
         <div className="Buttons">
             <table>
                 <tbody>
                     <tr>
-                        <button onClick={handleClick}>{countryName}</button>
-                        <button>lepo</button>
-                    </tr>
-                    <tr>
-                        <button>lepoasdasda</button>
-                        <button>lepo</button>
+                        {buttonOrders[randomNumber].map((countryName, index) => (
+                            <button key={index} onClick={() => handleClick(countryName)} style={{ backgroundColor: buttonColors }}>{countryName}</button>
+                            ))}
                     </tr>
                 </tbody>
-
             </table>
         </div>
     );

@@ -1,10 +1,10 @@
 import './styles.css';
 
-export const Info = ({highScore, page}) => {
+export const Info = ({highScore, page, allPages}) => {
     return(
         <div className='Info'>
             <p>High Score: {highScore}</p>
-            <p>{page}/243</p>
+            <p>{page}/{allPages}</p>
         </div>
     );
 }
