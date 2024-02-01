@@ -1,0 +1,18 @@
+.Menu{
+    background-color: #FF6868;
+    height:45rem;
+    width:40%;
+    border-radius: 20px;
+    padding: 3%;
+    align-items:center;
+    justify-content: center;
+    display: inline-block;
+}
+
+.flag-div{
+    min-height: 175px;
+    max-height: 175px;
+    align-items:center;
+    justify-content: center;
+    display: flex;
+}
