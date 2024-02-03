@@ -1,4 +1,3 @@
-// Menu.js
 import React, { useState, useEffect } from 'react';
 import { Buttons } from '../Buttons';
 import { data } from '../../data/data';
@@ -14,11 +13,9 @@ export const Menu = () => {
     const [countryName, setCountryName] = useState('');
     const [highScore, setHighScore] = useState(0);
     const [page, setPage] = useState(1);
-    const [buttonColors, setButtonColors] = useState({
-        [countryName2]: '',
-        [countryName3]: '',
-        [countryName4]: ''
-    });
+    const [buttonColors, setButtonColors] = useState([]);
+    const newButtonColors = [...buttonColors];
+
 
     const randomCountryGeneration = () => {
         const randomNames = [];
@@ -44,24 +41,45 @@ export const Menu = () => {
         randomCountryGeneration();
     }, [page]);
 
-    const wrongAnswer = () => {
-        setCurrentData([...data]);
-        setPage(1);
-    };
+    const correctAnswer = (index) =>{
+        const audio = new Audio('./correct-choice-43861.mp3');
+        audio.play();
+        
+        newButtonColors[index] = '#37bd6a'; 
+        setButtonColors(newButtonColors); 
 
-    const handleClickCorrect = (country) => {
-        const newButtonColors = { ...buttonColors };
-        if (country === countryName) {
-            newButtonColors[country] = '#008000';
-            setButtonColors(newButtonColors);
+        setTimeout(() => {
+            newButtonColors[index] = '#FFFFFF';
+            setButtonColors(newButtonColors); 
             setPage(page + 1);
-            if (page > highScore) {
-                setHighScore(page);
+            if (page + 1 > highScore) {
+                setHighScore(page + 1);
             }
-        } else {
-            wrongAnswer();
+        }, 2000);
+    }
+
+    const wrongAnswer = (index) =>{
+        newButtonColors[index] = '#bd3737'; 
+        setButtonColors(newButtonColors); 
+
+        setTimeout(() => {
+            newButtonColors[index] = '#FFFFFF'; 
+            setButtonColors(newButtonColors); 
+            randomCountryGeneration();
+            setCurrentData([...data]);
+            setPage(1);
+        }, 2000);
+    }
+
+
+    const handleClickCountry = (country, index) => {
+        if (country === countryName) {
+            correctAnswer(index);
+        } else if (country !== countryName){
+            wrongAnswer(index);
         }
     };
+    
 
     return (
         <div className="Menu">
@@ -74,7 +92,7 @@ export const Menu = () => {
                 countryName2={countryName2}
                 countryName3={countryName3}
                 countryName4={countryName4}
-                handleClick={handleClickCorrect}
+                handleClick={handleClickCountry}
                 buttonColors={buttonColors}
             />
         </div>

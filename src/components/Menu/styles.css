@@ -1,5 +1,5 @@
 .Menu{
-    background-color: #FF6868;
+    background-color: #3A1078;
     height:45rem;
     width:40%;
     border-radius: 20px;
@@ -10,9 +10,24 @@
 }
 
 .flag-div{
-    min-height: 175px;
-    max-height: 175px;
+    min-height: 200px;
+    max-height: 200px;
     align-items:center;
     justify-content: center;
     display: flex;
 }
+
+.flag-div img{
+    min-height: 200px;
+    max-height: 200px;
+
+}
+
+
+@media screen and (max-width: 1012px) {
+    .Menu{
+
+        width:80%;
+
+    }
+  }
