@@ -1,13 +1,16 @@
-.Menu{
+.Menu {
     background-color: #3A1078;
-    height:45rem;
-    width:40%;
+    height: 40rem;
+    width: 40%;
     border-radius: 20px;
-    padding: 3%;
-    align-items:center;
+    padding: 5%;
+    align-items: center;
     justify-content: center;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+
 }
+
 
 .flag-div{
     min-height: 200px;
@@ -28,6 +31,12 @@
     .Menu{
 
         width:80%;
+    }
+}
+
+@media screen and (min-width: 1776px) {
+    .Menu {
+        height: 30rem;
 
     }
-  }
+}

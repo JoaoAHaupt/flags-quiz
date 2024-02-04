@@ -13,7 +13,7 @@ export const Menu = () => {
     const [countryCode, setCountryCode] = useState('');
     const [countryName, setCountryName] = useState('');
     const [highScore, setHighScore] = useState(0);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(234);
     const [buttonColors, setButtonColors] = useState([]);
     const newButtonColors = [...buttonColors];
 
@@ -95,24 +95,33 @@ export const Menu = () => {
             wrongAnswer(index);
         }
 
-      
+    
     };
     
 
     return (
         <div className="Menu">
-            <Info highScore={highScore} page={page} allPages={data.length}></Info>
-            <div className='flag-div'>
-                    {countryCode && <img src={require(`../../assets/images/png250px/${countryCode}.png`)} alt='Country Flag' />}
-            </div>
-            <Buttons
-                countryName1={countryName}
-                countryName2={countryName2}
-                countryName3={countryName3}
-                countryName4={countryName4}
-                handleClick={handleClickCountry}
-                buttonColors={buttonColors}
-            />
+            {page > data.length ? (
+                <div>
+                    <p>CONGRATULATIONS YOU ARE A GEOGRAPHY MASTER!</p>
+                </div>  
+            ) : (
+                <>
+                    <Info highScore={highScore} page={page} allPages={data.length} />
+                    <div className='flag-div'>
+                        {countryCode && <img src={require(`../../assets/images/png250px/${countryCode}.png`)} alt='Country Flag' />}
+                    </div>
+                    <Buttons
+                        countryName1={countryName}
+                        countryName2={countryName2}
+                        countryName3={countryName3}
+                        countryName4={countryName4}
+                        handleClick={handleClickCountry}
+                        buttonColors={buttonColors}
+                    />
+                </>
+            )}
         </div>
     );
+    
 };
