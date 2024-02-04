@@ -3,7 +3,8 @@ import { Buttons } from '../Buttons';
 import { data } from '../../data/data';
 import { Info } from '../Info';
 import './styles.css';
-
+import correctSound from '../../assets/sounds/correct-choice-43861.mp3'
+import wrongSound from '../../assets/sounds/negative_beeps-6008.mp3'
 export const Menu = () => {
     const [currentData, setCurrentData] = useState([...data]);
     const [countryName2, setCountryName2] = useState('');
@@ -16,34 +17,48 @@ export const Menu = () => {
     const [buttonColors, setButtonColors] = useState([]);
     const newButtonColors = [...buttonColors];
 
-
+    function playCorrect(){
+        new Audio(correctSound).play()
+    }
+    
+    function playWrong(){
+        new Audio(wrongSound).play()
+    }
     const randomCountryGeneration = () => {
-        const randomNames = [];
-        for (let i = 0; i < 3; i++) {
-            const randomIndex = Math.floor(Math.random() * currentData.length);
-            const randomObject = currentData[randomIndex];
-            randomNames.push(randomObject.name);
-        }
-
-        setCountryName2(randomNames[0]);
-        setCountryName3(randomNames[1]);
-        setCountryName4(randomNames[2]);
-
         const randomIndex = Math.floor(Math.random() * currentData.length);
         const randomObjectCorrect = currentData[randomIndex];
-
+    
+        const countryNameLocal = randomObjectCorrect.name; 
+    
         setCountryCode(randomObjectCorrect.code.toLowerCase());
-        setCountryName(randomObjectCorrect.name);
+        setCountryName(countryNameLocal);
         setCurrentData(currentData.filter(country => country.code !== randomObjectCorrect.code));
+    
+        const randomNames = [];
+        let i = 0;
+        while (i < 3) {
+            const randomIndex = Math.floor(Math.random() * currentData.length);
+            const randomObject = currentData[randomIndex];
+            if (randomObject.name !== countryNameLocal && !randomNames.includes(randomObject.name)) {
+                randomNames.push(randomObject.name);
+                i++;
+            }
+            console.log(randomNames)
+        }
+        const randomNamesLength = randomNames.length;
+    
+        setCountryName2(randomNames[randomNamesLength - 3]);
+        setCountryName3(randomNames[randomNamesLength - 2]);
+        setCountryName4(randomNames[randomNamesLength - 1]);
     };
+    
 
     useEffect(() => {
         randomCountryGeneration();
     }, [page]);
 
     const correctAnswer = (index) =>{
-        const audio = new Audio('./correct-choice-43861.mp3');
-        audio.play();
+        playCorrect();
         
         newButtonColors[index] = '#37bd6a'; 
         setButtonColors(newButtonColors); 
@@ -59,6 +74,7 @@ export const Menu = () => {
     }
 
     const wrongAnswer = (index) =>{
+        playWrong();
         newButtonColors[index] = '#bd3737'; 
         setButtonColors(newButtonColors); 
 
@@ -78,6 +94,8 @@ export const Menu = () => {
         } else if (country !== countryName){
             wrongAnswer(index);
         }
+
+      
     };
     
 
@@ -85,7 +103,7 @@ export const Menu = () => {
         <div className="Menu">
             <Info highScore={highScore} page={page} allPages={data.length}></Info>
             <div className='flag-div'>
-                {countryCode && <img src={require(`../../assets/images/png250px/${countryCode}.png`)} alt='Country Flag' />}
+                    {countryCode && <img src={require(`../../assets/images/png250px/${countryCode}.png`)} alt='Country Flag' />}
             </div>
             <Buttons
                 countryName1={countryName}

@@ -19,13 +19,14 @@ export const Buttons = ({ countryName1, countryName2, countryName3, countryName4
         generateButtonOrders();
     }, [countryName1, countryName2, countryName3, countryName4]);
 
+ 
     return (
         <div className="Buttons">
             <table>
                 <tbody>
                     <tr>
                         {buttonOrders.map((countryName, index) => (
-                            <button key={index} onClick={() => handleClick(countryName, index)} style={{ backgroundColor: buttonColors[index] }}>{countryName}</button>
+                            <button key={index} onClick={() => handleClick(countryName, index)}  style={{ backgroundColor: buttonColors[index] }}>{countryName}</button>
                         ))}
                     </tr>
                 </tbody>
