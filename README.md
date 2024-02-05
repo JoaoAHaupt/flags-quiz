@@ -16,10 +16,12 @@ Flag Quiz App is a simple web application built using React that allows users to
 To run the Flag Quiz App locally, follow these steps:
 
 Clone the repository: git clone https://github.com/JoaoAHaupt/flags-quiz
-Navigate to the project directory: cd flag-quiz-app
-Install dependencies: npm install
-Start the development server: npm start
+Navigate to the project directory: `cd flags-quiz`
+Install dependencies: `npm install`
+Start the development server: `npm start`
 Open your browser and navigate to http://localhost:3000 to view the app.
+
+
 
 
 
