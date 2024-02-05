@@ -13,7 +13,7 @@ export const Menu = () => {
     const [countryCode, setCountryCode] = useState('');
     const [countryName, setCountryName] = useState('');
     const [highScore, setHighScore] = useState(0);
-    const [page, setPage] = useState(234);
+    const [page, setPage] = useState(1);
     const [buttonColors, setButtonColors] = useState([]);
     const newButtonColors = [...buttonColors];
 
